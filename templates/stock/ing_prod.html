@@ -1,0 +1,18 @@
+{% extends 'user/home.html' %}
+{% block Body %}    
+    <div class="container-fluid">
+        <div class="form-group" style="padding: 3% ;">
+            <div class="col-sm-15" style="padding: 3%;">
+                <div style="padding: 2%;">
+                    <h2 class="text-center">Formulario para carga de productos en stocks</h2>
+                </div>
+                <form method="post"> {% csrf_token %}
+                    {{ form.as_p}}
+                    <input type="submit" class="btn btn-primary mb-8" value="Registrar">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock Body %}
+
+    

@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block Title %}
+    <title>Contacto</title>
+{% endblock Title %}
+    
+{% block Corrousel %}{% endblock Corrousel %}
+    
+
+{% block Body %}
+    <div class="container-fluid">
+        <div class="form-group" style="padding: 5% ;">
+            <div class="col-sm-15" style="padding: 5%;">
+                <form method="post"> {% csrf_token %}
+                    {{ form.as_p}}
+                    <input type="submit" class="btn btn-primary mb-2" value="Enviar">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock Body %}
+    

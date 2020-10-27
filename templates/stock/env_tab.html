@@ -1,0 +1,29 @@
+{% extends 'user/home.html' %}
+{% load static %}
+
+
+
+{% block Body %}
+<div class="row justify-content-center" style="padding-top: 5%;">
+    <div class="col-sm-3  ">
+        <div class="card">
+            <img class="card-img-top" src="https://image.freepik.com/foto-gratis/cajas-paquete-concepto-compras-linea-carro-laptop-mesa-espacio-copia_38716-137.jpg"  alt="Card image cap">
+            <div class="card-body" >
+                <h5 class="card-title">Gestión de envios de productos</h5>
+                <a href="{% url 'r_env_prod' %}" class="btn" style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Realizar envio</a>
+                <a href="{% url 'l_env_p' %}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Ver envios</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3  ">
+        <div class="card">
+            <img class="card-img-top" src="https://www.nemetz-ag.at/wp-content/uploads/2020/01/AdobeStock_289176858_web.jpg"  alt="Card image cap">
+            <div class="card-body" >
+                <h5 class="card-title">Gestión de envios de materiales</h5>
+                <a href="{% url 'r_env_mat' %}" class="btn" style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Realizar envio</a>
+                <a href="{% url 'stat_form' e=2%}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Ver envios</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock Body %}

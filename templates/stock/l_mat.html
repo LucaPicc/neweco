@@ -1,0 +1,39 @@
+{% extends 'user/home.html' %}
+
+
+
+{% block Body %}
+    
+        <div class="container-fluid" style="padding: 10%;">
+            <div class="card">
+                <div class="card-header text-ligth" >
+                    <strong class="card-title"><h1 class="text-center">Listado de materiales</h1></strong>
+                </div>
+                <div class="table-stats order-table ov-h">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                {% for s_mat in object_list %}
+                                {% if s_mat.entidad == user.entity %}
+                                <tr>
+                                    <td>{{ s_mat.mat }}</td>
+                                    <td>{{ s_mat.cant }}</td>
+                                    <td>{{ s_mat.unidad }}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+{% endblock Body %}

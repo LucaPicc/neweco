@@ -1,0 +1,19 @@
+{% extends 'user/home.html' %}
+{% load static %}
+
+
+
+{% block Body %}
+<div class="row justify-content-center" style="padding-top: 5%;">
+    <div class="col-sm-3  ">
+        <div class="card">
+            <img class="card-img-top" src="https://image.freepik.com/foto-gratis/cajas-paquete-concepto-compras-linea-carro-laptop-mesa-espacio-copia_38716-137.jpg"  alt="Card image cap">
+            <div class="card-body" >
+                <h5 class="card-title"></h5>
+                <a href="{% url 'l_prod' %}" class="btn" style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Listar Stock</a>
+                <a href="{% url 'i_prod'%}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Cargar al stock</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock Body %}

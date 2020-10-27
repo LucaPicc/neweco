@@ -1,0 +1,155 @@
+{% extends 'user/home.html' %}
+
+
+{% block ExtraHeader %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+{% endblock ExtraHeader %}
+
+
+{% block Body %}
+<div class="row" style="padding-left: 5%;">
+        <!--Card Empleos en disposición-->
+      <div class="col-md">
+        <div class="card" style="width: 90%;">
+            <canvas id="ChartDisp" width="400" height="200"></canvas>
+            <div class="card-body">
+                <h8 class="card-title">Evolución de cantidad de empleos en Disposición final por mes </h8>  
+            </div>
+          </div>
+      </div>
+        <!--Card Empleos en porcentaje-->
+        <div class="col-md">
+            <div class="card" style="width: 90%;">
+                <canvas id="ChartPie" width="400" height="200"></canvas>
+                <div class="card-body">
+                    <h8 class="card-title">Porcentaje de empleos en cada area</h8>   
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock Body %}
+
+
+{% block ExtraScript %}
+<script>
+    // Script grafica de disposición
+    var ctxdisp = document.getElementById("ChartDisp").getContext('2d');
+    var Chartdisp = new Chart(ctxdisp, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [
+            {
+                label:'Empleos en clasificación',
+                data: {{data_clas|safe}},
+                backgroundColor: [
+                    {% for i in data_clas %}
+                    'rgba(255, 206, 86, 0.2)',
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_clas %}
+                    'rgba(255, 206, 86, 0.2)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },              
+                
+            {
+                label:'Empleos en disposición',
+                data: {{data_disp|safe}},
+                backgroundColor: [
+                    {% for i in data_disp %}
+                    'rgba(255, 99, 132, 0.2)',
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_disp %}
+                    'rgba(255, 99, 132, 1)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },
+            
+            {
+                label:'Empleos en educación',
+                data: {{data_educ|safe}},
+                backgroundColor: [
+                    {% for i in data_educ %}
+                    'rgba(54, 162, 235, 0.2)',        
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_educ %}
+                    'rgba(54, 162, 235, 1)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },
+            {
+                label:'Empleos en recolección',
+                data: {{data_reco|safe}},
+                backgroundColor: [
+                    {% for i in data_reco %}
+                    'rgba(75, 192, 192, 0.2)',
+                    {% endfor %}
+                    
+                ],
+                borderColor: [
+                    {% for i in data_reco %}
+                    'rgba(75, 192, 192, 1)',
+                    {% endfor %} 
+                ],
+                borderWidth: 1
+            
+            }
+            ]
+        },
+        options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+    });
+    // Script grafica pie Empleos
+    var ctxdisp = document.getElementById("ChartPie").getContext('2d');
+    var Chartdisp = new Chart(ctxdisp, {
+        type: 'pie',
+        data: {
+            labels: ["Clasificación","Educación","Recolección","Disposición"],
+            datasets: [{
+                label:'Empleos porcentual',
+                data: {{prom|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+</script>
+{% endblock ExtraScript %}
+    
+       
+
+
+
+    
+    
+    
+        
+
+    

@@ -1,0 +1,47 @@
+{% extends 'user/home.html' %}
+{% load static %}
+
+
+
+{% block Body %}
+   <div class="row" style="padding: 5%; padding-left: 15%;">
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;height: 23rem;">
+            <img class="card-img-top" src="https://i0.wp.com/formaciononline.eu/wp-content/uploads/2016/09/portales-de-empleo.jpg" alt="Card image cap">
+            <div class="card-body" >
+                <h5 class="card-title">Estadisticas de Empleo</h5>
+                <p class="card-text">Tenemos dos opciones, visualizar la estadistica de empleos de un unico año, o ver la evolución anual</p>
+                <a href="{% url 'stat_form' e=1%}" class="btn" style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Año único</a>
+                <a href="{% url 'stat_form' e=2%}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Evolución anual</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;height: 23rem;">
+            <img class="card-img-top" src="https://www.comboni.org/app-data/img/Contenuto/dettaglio/107644.jpg" alt="Card image cap">
+            <div class="card-body" style="margin-top: 5%;">
+                <h5 class="card-title">Estadisticas GIRSU</h5>
+                <p class="card-text">Tenemos dos opciones, visualizar la estadistica de empleos de un unico año, o ver la evolución anual</p>
+                <a href="{% url 'stat_form' e=3%}" class="btn" style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Año único</a>
+                <a href="{% url 'stat_form' e=4%}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Evolución anual</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;height: 23rem;">
+            <img class="card-img-top" src="https://www.weactchallenge.ch/sites/default/files/styles/blog_post_background/public/ecology.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Estadisticas de Reciclaje</h5>
+                <p class="card-text">Tenemos dos opciones, visualizar la estadistica de empleos de un unico año, o ver la evolución anual</p>
+                <a href="{% url 'stat_form' 5%}" class="btn"style="background-color: #ddf6dd;color: rgb(98, 103, 107);">Año único</a>
+                <a href="{% url 'stat_form' 6%}" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);">Evolución anual</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock Body %}
+    

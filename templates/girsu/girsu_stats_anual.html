@@ -1,0 +1,124 @@
+{% extends 'user/home.html' %}
+
+
+{% block ExtraHeader %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+{% endblock ExtraHeader %}
+
+
+{% block Body %}
+<div class="row" style="padding-left: 5%;">
+        <!--Card gastos en meses-->
+      <div class="col-md">
+        <div class="card" style="width: 90%;">
+            <canvas id="ChartDisp" width="400" height="200"></canvas>
+            <div class="card-body">
+                <h8 class="card-title">Gastos por mes discriminando por area</h8>  
+            </div>
+          </div>
+      </div>
+        <!--Card gastos en porcentaje-->
+        <div class="col-md">
+            <div class="card" style="width: 90%;">
+                <canvas id="ChartPie" width="400" height="200"></canvas>
+                <div class="card-body">
+                    <h8 class="card-title">Gastos mensuales promedios</h8>  
+                </div>
+              </div>
+          </div>
+{% endblock Body %}
+
+
+{% block ExtraScript %}
+<script>
+    // Script grafica de disposición
+    var ctxdisp = document.getElementById("ChartDisp").getContext('2d');
+    var Chartdisp = new Chart(ctxdisp, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [
+            {
+                label:'Reciclaje',
+                data: {{data_greci|safe}},
+                backgroundColor: [
+                    {% for i in data_greci %}
+                    'rgba(255, 206, 86, 0.2)',
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_greci %}
+                    'rgba(255, 206, 86, 0.2)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },              
+                
+            {
+                label:'Recolección',
+                data: {{data_greco|safe}},
+                backgroundColor: [
+                    {% for i in data_greco %}
+                    'rgba(255, 99, 132, 0.2)',
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_greco %}
+                    'rgba(255, 99, 132, 1)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },
+            
+            {
+                label:'Tratamiento',
+                data: {{data_gtrat|safe}},
+                backgroundColor: [
+                    {% for i in data_gtrat %}
+                    'rgba(54, 162, 235, 0.2)',        
+                    {% endfor %}
+                ],
+                borderColor: [
+                    {% for i in data_gtrat %}
+                    'rgba(54, 162, 235, 1)',
+                    {% endfor %}
+                ],
+                borderWidth: 1
+            },
+            ]
+        },
+        options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+    });
+    var ctxdisp = document.getElementById("ChartPie").getContext('2d');
+    var Chartdisp = new Chart(ctxdisp, {
+        type: 'pie',
+        data: {
+            labels: ["Reciclaje",'Recolección','Tratamiento'],
+            datasets: [{
+                label:'Empleos porcentual',
+                data: {{gp|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+    
+</script>
+{% endblock ExtraScript %}

@@ -1,0 +1,141 @@
+{% extends 'user/home.html' %}
+
+
+{% block ExtraHeader %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
+{% endblock ExtraHeader %}
+
+
+{% block Body %}
+<div class="row" style="padding: 3%;padding-left: 5%;">
+    <div class="col-md">
+        <div class="card" style="width: 100%;">
+            <canvas id = "ChartA" width="400" height="200"></canvas>
+            <div class="card-body">
+                <h6 class="card-title">Comparativa de gastos anuales discriminado por sector</h6>                     
+            </div>
+        </div>
+    </div>  
+        <div class="col-md">
+            <div class="card" style="width: 100%;">
+                <canvas id = "ChartRadar" width="400" height="200"></canvas>
+                <div class="card-body">
+                    <h6 class="card-title">Gatos anuales</h6>                     
+                </div>
+            </div>
+        </div> 
+
+</div>
+
+{% endblock Body %}
+    
+
+{% block ExtraScript %}
+
+    <script>
+        var ctxa = document.getElementById('ChartA').getContext('2d');
+        var Charta = new Chart(ctxa,{
+            type:'bar',
+            data:{
+                labels:{{ labels|safe }},
+                datasets:[
+                    {
+                        label:['Reciclaje'],
+                        data:{{prom_reci|safe}},
+                        backgroundColor:[
+                            {% for i in prom_reci %}
+                            'rgba(255, 99, 132, 0.2)',    
+                            {% endfor %}
+                        ],
+                        borderColor:[
+                            {% for i in prom_reci %}
+                            'rgba(255, 99, 132, 1)',    
+                            {% endfor %}
+                        ],
+                        borderColor:1
+                    },
+                    {
+                        label:['Recolección'],
+                        data:{{prom_reco|safe}},
+                        backgroundColor:[
+                            {% for i in prom_reco %}
+                            'rgba(75, 192, 192, 0.2)',    
+                            {% endfor %}
+                        ],
+                        borderColor:[
+                            {% for i in prom_reco %}
+                            'rgba(75, 192, 192, 1)',    
+                            {% endfor %}
+                        ],
+                        borderColor:1
+                    },
+                    {
+                        label:['Tratamiento'],
+                        data:{{prom_trat|safe}},
+                        backgroundColor:[
+                            {% for i in prom_trat %}
+                            'rgba(54, 162, 235, 0.2)',   
+                            {% endfor %}
+                        ],
+                        borderColor:[
+                            {% for i in prom_trat %}
+                            'rgba(54, 162, 235, 1)',    
+                            {% endfor %}
+                        ],
+                        borderColor:1
+                    },
+                    
+                ]
+            },
+            options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }    
+        });
+
+        const CHART = document.getElementById('ChartRadar')
+        let barChart = new Chart(CHART,{
+            type:'radar',
+            data:{
+                labels: ['Clasificación','Educación','Recolección'],
+                datasets:[
+                    {% for keys,value in prom.items %}
+                    {
+                    label:{{keys}},
+                    backgroundColor: colorHEX,
+                    borderColor: colorHEX,
+                    borderWidth:2,
+                    data:{{value}}
+                    },
+                    {% endfor %}                    
+                ]
+                
+                
+            }
+        });
+        function generarLetra(){
+            var letras = ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"];
+            var numero = (Math.random()*15).toFixed(0);
+            return letras[numero];
+        }
+                
+        function colorHEX(){
+            var coolor = "";
+            for(var i=0;i<6;i++){
+                coolor = coolor + generarLetra() ;
+            }
+            return "#" + coolor;
+        }
+    </script>
+
+            
+            
+                
+        
+{% endblock ExtraScript %}
+    

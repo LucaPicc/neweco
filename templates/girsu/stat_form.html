@@ -1,0 +1,16 @@
+{% extends 'user/home.html' %}
+{% block Body %}    
+    <div class="container-fluid">
+        <div class="form-group" style="padding: 3% ;">
+            <div class="col-sm-15" style="padding: 3%;">
+                <div style="padding: 2%;">
+                    <h2 class="text-center"style="color: rgb(98, 103, 107);">Elija la entidad y el año para ver las estadisticas</h2> 
+                </div>
+                <form method="post"> {% csrf_token %}
+                        {{form.as_p}}
+                    <input type="submit" class="btn" style="background-color: #95c2ab; color: rgb(98, 103, 107);" value="Enviar">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock Body %}
